@@ -1,1 +1,170 @@
-welcome 1
+
+
+CREATE TABLE partsupp(
+					ps_partkey int,
+					ps_suppkey int,
+					ps_availqty int,
+					ps_supplycost int,
+					ps_comment varchar(250),
+					PRIMARY KEY (ps_partkey));
+
+CREATE TABLE lineitem(
+                    l_orderkey int,
+                    l_partkey int,
+                    l_suppkey int,
+                    l_linenumber int,
+                    l_quantity int,
+                    l_extendedprice int,
+                    l_discount int,
+                    l_tax int,
+                    l_returnflag boolean,
+                    l_linestatus varchar(250),
+                    l_shipdate date,
+                    l_commitdate date,
+                    l_receiptdate date,
+                    l_shipinstruck varchar(250),
+                    l_shipmode varchar(250),
+                    l_comment varchar(250)
+                    );  
+    ALTER TABLE lineitem ADD CONSTRAINT l_pkey PRIMARY KEY (l_partkey,l_suppkey), ADD FOREIGN KEY (l_partkey) REFERENCES partsupp(ps_partkey);
+    //ALTER TABLE lineitem ADD FOREIGN KEY (l_orderkey) REFERENCES partsupp(ps_suppkey);                  
+
+    CREATE TABLE orders (
+                    o_orderkey int,
+                    o_custkey int,
+                    o_orderstatus varchar(250),
+                    o_totalprice int,
+                    o_orderdate date,
+                    o_orderpriority varchar(250),
+                    o_cleark varchar(250),
+                    o_shippriority varchar(250),
+                    o_comment varchar(250),
+                    PRIMARY KEY (o_orderkey));
+
+
+CREATE TABLE supplier (
+                    s_suppkey int,
+                    s_name varchar(250),
+                    s_address varchar(250),
+                    s_nationkey int,
+                    s_phone int,
+                    s_accbal int,
+                    s_comment varchar(250),
+                    PRIMARY KEY (s_suppkey));
+
+CREATE TABLE customer (
+            c_custkey int,
+            c_name varchar(250),
+            c_address varchar(250),
+            c_nationkey int,
+            c_phone int,
+            c_accbl int,
+            c_mktsegment varchar(250),
+            c_comment varchar(250),
+            PRIMARY KEY (c_custkey));
+
+
+CREATE TABLE nation (
+            n_nationkey int,
+            n_name varchar(250),
+            n_regionkey int,
+            n_comment varchar(250),
+            PRIMARY KEY (n_nationkey));
+
+
+CREATE TABLE region (
+            r_regionkey int,
+            r_name varchar(250),
+            r_comment varchar(250),
+            PRIMARY KEY (r_regionkey));
+
+-------------------------------------
+
+CREATE TABLE Artist (ArtistId int, Name varchar(250));
+
+CREATE TABLE Album (AlbumId int,
+                   title varchar (250),
+                   ArtistId int,
+                   PRIMARY KEY (AlbumId));
+
+CREATE TABLE Track (TrackId int,
+                      Name varchar(250),
+                      AlbumId int,
+                      MediaTypeId int,
+                      GenreId int,
+                      Composer varchar(250),
+                      Milliseconds int,
+                      Bytes varchar(250),
+                      UnitPrice int,
+                      PRIMARY KEY (TrackId));
+
+CREATE TABLE MediaTable (MediaTypeId int,
+                        Name varchar (250),
+                        PRIMARY KEY (MediaTypeId));
+
+CREATE TABLE Playlist (PlaylistId int,
+                      Name varchar(250),
+                      PRIMARY KEY (PlaylistId));
+
+CREATE TABLE PlaylistTrack (PlaylistId int,
+                           TrackId int,
+                           PRIMARY KEY (PlaylistId));
+
+CREATE TABLE Genre (GenreId int,
+                   Name varchar (250),
+                   PRIMARY KEY (Genreid));
+
+CREATE TABLE Employee (EmployeeId int,
+                      LastName varchar(250),
+                      FirstName varchar(250),
+                      Title varchar(250),
+                      ReportsTo varchar(250),
+                      BirthDate DATE,
+                      HireDate DATE,
+                      Address varchar(250),
+                      City varchar(250),
+                      State varchar(250),
+                      Country varchar(250),
+                      PostalCode varchar(250),
+                      Phone int,
+                      Fax int,
+                      Email varchar(250),
+                      PRIMARY KEY (EmployeeId)
+                      );
+
+CREATE TABLE Customer (CustomerId int,
+                      FirstName varchar(250),
+                      LastName varchar(250),
+                      Company varchar(250),
+                      Address varchar(250),
+                      City varchar(250),
+                      State varchar(250), 
+                      Country varchar(250),
+                      PostalCode int,
+                      Phone int,
+                      Fax int,
+                      Email varchar(250),
+                      SopportRapid varchar(250),
+                      PRIMARY KEY (CustomerId)
+                      );
+
+CREATE TABLE InvoiceLine (InvoicelineId int,
+                         InvoiceId int,
+                         TrackId int,
+                         UnitPrice int,
+                         Quantity int,
+                         PRIMARY KEY (InvoicelineId)
+                         );
+
+CREATE TABLE Invoice (InvoiceId int,
+                     CustomerId int,
+                     InvoiceDate DATE,
+                     BillingAddress varchar(250),
+                     BillingCity varchar(250),
+                     BillingState varchar(250),
+                     BillingCountry varchar(250),
+                     BillingCountryCode int,
+                     Total int,
+                     PRIMARY KEY (InvoiceId)
+                     );
+
